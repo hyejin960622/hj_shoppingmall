@@ -30,12 +30,18 @@ public class HomeController {
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
   public ModelAndView signupPost(ModelAndView mv, MemberVO member){
   		if(memberService.signup(member)) {
-  			mv.setViewName("redirect:/");  
+  			mv.setViewName("redirect:/signup/success");  
   		}else {
   			mv.setViewName("redirect:/signup");  
   		}
       return mv;
   }
+	@RequestMapping(value = "/signup/success", method = RequestMethod.GET)
+	public ModelAndView signupSuccessGet(ModelAndView mv) {
+		mv.addObject("title","회원가입완료");
+		mv.setViewName("/main/signupSuccess");
+		return mv;
+	}
 
 
 	

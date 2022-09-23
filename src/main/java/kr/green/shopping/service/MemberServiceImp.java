@@ -29,6 +29,9 @@ public class MemberServiceImp implements MemberService {
 			if(member.getMe_name() == null || member.getMe_name().length() == 0)
 				return false;
 			
+			if(member.getMe_phone() == null || member.getMe_phone().length() == 0)
+				return false;
+			
 			MemberVO dbMember = memberDao.selectMember(member.getMe_id());
 			if(dbMember != null)
 				return false;

@@ -89,58 +89,52 @@
 	})
 	
 	$(function(){
-			$("form").validate({
-				rules: {
-					me_id: {
-						required : true,
-					},
-					me_pw: {
-						required : true,
-						regex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,20}$/
-					},
-					me_pw2: {
-						required : true,
-						equalTo : me_pw
-					},
-					me_name: {
-						required : true,
-						regex: /^([가-힣]{2,20})|([a-zA-Z]{2,20})$/
-					},
-					me_phone: {
-						required : true,
-						regex: /^(010)-(\d{4})-(\d{4})$/
-					},
-					 me_email: {
-			      required : "필수항목입니다.",
-			      email : "이메일 형식에 맞지 않습니다."
-			    },
-			},
-			//규칙체크 실패시 출력될 메시지
-			messages : {
-				me_pw: {
-					required : "필수항목입니다.",
-					regex : "아이디를 입력해주세요."
-				},
-				me_email: {
-					required : "필수항목입니다.",
-					email : "이메일 형식에 맞게 작성해주세요."
-				},
-				me_pw: {
-					required : "필수항목입니다.",
-					regex : "영어, 숫자, 특수문자(!@#$%^&*)를 혼합한 8글자 이상 20자 이하로 입력해주세요."
-				},
-				me_pw2: {
-					required : "필수항목입니다.",
-					equalTo : "비밀번호가 일치하지 않습니다."
-				},
-				me_name: {
-					required : "필수항목입니다.",
-					regex: "띄어쓰기 없이 2글자 이상 20자 이하로 입력해주세요."
-				},
-				me_phone: {
-					required : "필수항목입니다.",
-					regex: "010-0000-0000 형식으로 입력해주세요."
-				}
+	    $("form").validate({
+	        rules: {
+	            me_id: {
+	                required : true
+	            },
+	            me_pw: {
+	                required : true
+	            },
+	            me_pw2: {
+	                required : true,
+	                equalTo : me_pw
+	            },
+	            me_name: {
+	                required : true
+	            },
+	            me_email: {
+	            	required : true,
+	                email : true
+	            },
+	           me_phone: {
+	                required : true
+	            }
+	        },
+	        //규칙체크 실패시 출력될 메시지
+	        messages : {
+	            me_id: {
+	                required : "필수항목입니다."
+	            },
+	            me_pw: {
+	            	required : "필수항목입니다."
+	            	
+	            },
+	            me_pw2: {
+	            	required : "필수항목입니다.",
+	              equalTo : "비밀번호가 일치하지 않습니다."
+	            },
+	            me_name: {
+	            	required : "필수항목입니다."
+	            },
+	            me_email: {
+	            	required : "필수항목입니다.",
+	            	email : "이메일 형식에 맞지 않습니다."
+	            },
+	            me_phone: {
+	            	required : "필수항목입니다."
+	            }
 	        }
 	    });
 	})
