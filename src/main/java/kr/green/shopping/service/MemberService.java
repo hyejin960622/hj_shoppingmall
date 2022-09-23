@@ -17,5 +17,8 @@ public interface MemberService {
 
 	public void logout(HttpServletRequest request, HttpServletResponse response);
 
+	public Object idCheck(MemberVO member);
+
+
 	
 }

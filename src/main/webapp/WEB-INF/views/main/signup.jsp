@@ -146,6 +146,52 @@
 	    },
 	    "Please check your input."
 	);
+	
+	let inCheck = false;
+	
+	$(function(){
+		$('#idCheck').click(function(){
+			let me_id = $('[name=me_id]').val();
+			if(me_id.trim().length == 0){
+				alert('아이디를 입력하세요')
+				return;
+			}
+			
+			let obj ={
+					me_id : me_id
+			}
+			
+			$.ajax({
+		        async:false,
+		        type:'POST',
+		        data:JSON.stringify(obj),
+		        url:"<%=request.getContextPath()%>/id/check",
+		        dataType:"json",
+		        contentType:"application/json; charset=UTF-8",
+		        success : function(data){
+		            //data.check
+		        	//data['check']
+		        	if(data.check){
+		        		alert('사용가능한 아이디입니다.')
+		        		idCheck = true;
+		        	}else{
+		        		alert('이미사용중인 아이디입니다.')
+		        	}
+		        }
+		    });
+		});
+		
+		$('[name=me_id]').change(function(){
+			idCheck = false;
+		})
+		$('form').submit(function(){
+			if(idCheck)
+				return true;
+			
+			alert('아이디 중복검사를 확인하세요')
+				return false;
+		})
+	})
 				
 
 function execDaumPostcode() {

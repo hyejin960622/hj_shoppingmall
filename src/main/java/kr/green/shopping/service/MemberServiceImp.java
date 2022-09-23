@@ -98,5 +98,16 @@ public class MemberServiceImp implements MemberService {
 			memberDao.updateMemberSession(user);
 		}
 		
+		@Override
+		public Object idCheck(MemberVO member) {
+			if(member == null || member.getMe_id() == null)
+				return false;
+			if(memberDao.selectMember(member.getMe_id()) != null)
+					return false;
+			return true;
+		}
+		
+		
+		
 		
 }
