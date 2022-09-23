@@ -50,10 +50,26 @@ public class MemberServiceImp implements MemberService {
 
 			if(user == null)
 				return null;
+			
+			user.setAutoLogin(member.isAutoLogin());
 
 			if(user.getMe_pw().equals(member.getMe_pw()))
 				return user;
 
 			return null;
+		}
+		
+		@Override
+		public void updateMemberSession(MemberVO user) {
+			if(user == null || user.getMe_email() == null)
+				return;
+			memberDao.updateMemberSession(user);
+		}
+
+		@Override
+		public MemberVO loginBySession(String me_s_id) {
+			if(me_s_id == null)
+				return null;
+			return memberDao.selectBySession(me_s_id);
 		}
 }

@@ -36,12 +36,16 @@
 	    </beans:property>
 	</beans:bean>
 	
-	<beans:bean id="loginInterceptor" 
-	class="kr.green.shopping.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="loginInterceptor" class="kr.green.shopping.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="autoLoginInterceptor"	class="kr.green.shopping.interceptor.AutoLoginInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
 			<mapping path="/login"/>
 			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="autoLoginInterceptor"/>
 		</interceptor>
 	</interceptors>
 	
