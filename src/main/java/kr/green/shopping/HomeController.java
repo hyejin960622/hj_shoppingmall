@@ -1,5 +1,8 @@
 package kr.green.shopping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +55,14 @@ public class HomeController {
 			mv.setViewName("/main/login");
 		else
 			mv.setViewName("redirect:/");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/logout")
+	public ModelAndView logout(ModelAndView mv, HttpServletRequest request,
+			HttpServletResponse response) {
+		memberService.logout(request,response);
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 	

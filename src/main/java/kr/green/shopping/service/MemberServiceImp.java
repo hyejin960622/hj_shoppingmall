@@ -1,7 +1,13 @@
 package kr.green.shopping.service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 
 import kr.green.shopping.dao.MemberDAO;
 import kr.green.shopping.vo.MemberVO;
@@ -72,4 +78,25 @@ public class MemberServiceImp implements MemberService {
 				return null;
 			return memberDao.selectBySession(me_s_id);
 		}
+		@Override
+		public void logout(HttpServletRequest request, HttpServletResponse response) {
+			if(request == null)
+				return;
+			HttpSession session = request.getSession();
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			if(user == null)
+				return ;
+			session.removeAttribute("user");
+			Cookie cookie = WebUtils.getCookie(request, "lgCookie");
+			if(cookie == null || response == null)
+				return;
+			cookie.setPath("/");
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
+			user.setMe_s_id(null);
+			user.setMe_s_limit(null);
+			memberDao.updateMemberSession(user);
+		}
+		
+		
 }
