@@ -21,7 +21,7 @@
 		  <label for="me_id">ID</label>
 		  <input type="text" class="form-control" id="me_id" name="me_id">
 		</div>
-		<button class="btn btn-outline-success col-12 mb-3" type="button" id="idCheck">ID CHECK</button>		
+		<button class="btn btn-outline-success col-12 mb-3" type="button" id="idCheck">ID CHECK</button>	
 		<div class="form-group">
 		  <label for="me_pw">PASSWORD</label>
 		  <input type="password" class="form-control" id="me_pw" name="me_pw">
@@ -78,7 +78,6 @@
 		<button class="btn btn-outline-success col-12 mb-5">JOIN US</button>
 	</form>
 </div>
-
 <script type="text/javascript">
 	$(function(){
 		$( "#me_birth" ).datepicker({
@@ -142,58 +141,19 @@
 					required : "필수항목입니다.",
 					regex: "010-0000-0000 형식으로 입력해주세요."
 				}
-			},
-   	
-			submitHandler: function(form) {
-		     	if(!idCheck){
-						$('#me_id-error').text('이미 사용중인 아이디입니다.').show();
-						$('#me_id').focus();
-						return false;
-					}  
-		     	return true;
-		    }
-		 });
+	        }
+	    });
 	})
 	$.validator.addMethod(
-   "regex",
-   function(value, element, regexp) {
-       var re = new RegExp(regexp);
-       return this.optional(element) || re.test(value);
-   },
-   "Please check your input."
+	    "regex",
+	    function(value, element, regexp) {
+	        var re = new RegExp(regexp);
+	        return this.optional(element) || re.test(value);
+	    },
+	    "Please check your input."
 	);
-	
-$(function(){
-	$('[name=me_id]').on('input',function(){
-		idCheck = false;
-		let me_id = $(this).val();
-		console.log(me_id)
-		if(me_id.length == 0)
-			return;
-		
-		let obj = {
-				me_id : me_id
-		}
-		ajaxPost(false, obj, '/check/id', function(data){
-			idCheck = data.res;
-		})
-	})
-})
-let idCheck = false;
-function ajaxPost(async, dataObj, url, success){
-	$.ajax({
-	  async:async,
-	  type:'POST',
-	  data:JSON.stringify(dataObj),
-	  url:"<%=request.getContextPath()%>"+url,
-	  dataType:"json",
-	  contentType:"application/json; charset=UTF-8",
-	  success : function(data){
-		  success(data);
-	  }
-  });
-}
-	
+				
+
 function execDaumPostcode() {
 	new daum.Postcode({
 		oncomplete: function(data) {
@@ -217,7 +177,10 @@ function execDaumPostcode() {
 		}						
 	}).open();
 }
+
+
 </script>
+
 
 </body>
 </html>
