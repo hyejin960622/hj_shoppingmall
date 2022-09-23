@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
 
@@ -17,6 +18,9 @@ public class MemberServiceImp implements MemberService {
     @Autowired
     MemberDAO memberDao;
 
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
+    
 		@Override
 		public boolean signup(MemberVO member) {
 		//유효성 검사
@@ -39,8 +43,12 @@ public class MemberServiceImp implements MemberService {
 				return false;
 			
 			MemberVO dbMember = memberDao.selectMember(member.getMe_id());
+			
 			if(dbMember != null)
 				return false;
+			
+			String encPw = passwordEncoder.encode(member.getMe_pw());
+			member.setMe_pw(encPw);
 			
 			memberDao.insertMember(member);
 			return true;
@@ -59,9 +67,9 @@ public class MemberServiceImp implements MemberService {
 			
 			user.setAutoLogin(member.isAutoLogin());
 
-			if(user.getMe_pw().equals(member.getMe_pw()))
+			if(passwordEncoder.matches(member.getMe_pw(), user.getMe_pw()))
 				return user;
-
+			
 			return null;
 		}
 		
