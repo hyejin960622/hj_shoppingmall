@@ -45,7 +45,7 @@
         	<a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
       	</li>
       	<li class="nav-item">
-        	<a class="nav-link" href="#">shop</a>
+        	<a class="nav-link" href="<c:url value="/admin"></c:url>">관리자</a>
       	</li>  
 	    	</ul>
 		</div> 

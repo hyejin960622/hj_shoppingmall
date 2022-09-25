@@ -1,4 +1,4 @@
-package kr.green.shopping;
+package kr.green.shopping.controller;
 
 import java.util.HashMap;
 import java.util.Map;
