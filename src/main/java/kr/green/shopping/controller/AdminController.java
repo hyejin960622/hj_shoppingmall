@@ -17,7 +17,7 @@ import kr.green.shopping.vo.CategoryVO;
 
 @Controller
 public class AdminController {
-	
+
 	@Autowired
 	ProductService productService;
 	
@@ -29,7 +29,6 @@ public class AdminController {
 		mv.setViewName("/admin/home");
 		return mv;
 	}
-	
 	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
 	public ModelAndView category(ModelAndView mv) {
 		ArrayList<CategoryVO> list = productService.getCategoryList();
@@ -37,14 +36,13 @@ public class AdminController {
 		mv.setViewName("/admin/category");
 		return mv;
 	}
-	
 	@RequestMapping(value = "/admin/category", method = RequestMethod.POST)
 	public ModelAndView categoryPost(ModelAndView mv, CategoryVO category,
 			HttpServletResponse response) throws IOException {
 		int res = productService.insertCategory(category);
-
+		
 		messageService.categoryMessage(response, res);
-
+		
 		mv.setViewName("redirect:/admin/category");
 		return mv;
 	}

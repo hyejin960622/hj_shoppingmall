@@ -10,4 +10,6 @@ public interface ProductDAO {
 
 	void insertCategory(CategoryVO category);
 
+
+
 }
