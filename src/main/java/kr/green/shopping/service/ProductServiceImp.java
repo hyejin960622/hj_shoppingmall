@@ -1,12 +1,16 @@
 package kr.green.shopping.service;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.shopping.dao.ProductDAO;
+import kr.green.shopping.utils.UploadFileUtils;
 import kr.green.shopping.vo.CategoryVO;
+import kr.green.shopping.vo.ProductVO;
 
 	
 	@Service
@@ -14,6 +18,8 @@ import kr.green.shopping.vo.CategoryVO;
 		
 		@Autowired
 		ProductDAO productDao;
+		
+		String productThumbnailUploadPath = "C:\\git\\product";
 
 		@Override
 		public ArrayList<CategoryVO> getCategoryList() {
@@ -39,6 +45,27 @@ import kr.green.shopping.vo.CategoryVO;
 			}
 			
 			return 0;
+		}
+
+		@Override
+		public void insertProduct(ProductVO product, MultipartFile file) {
+			if(product == null || file == null || file.getOriginalFilename().length() == 0)
+				return;
+
+			String prefix = product.getPr_ca_name();//COM001
+			CategoryVO category = productDao.selectCategoryByCa_code(prefix.substring(0,3));
+			try {
+				product.setPr_ca_name(category.getCa_name());
+				String dir = product.getPr_ca_name();//COM
+
+				String str = UploadFileUtils.uploadFile(productThumbnailUploadPath,File.separator + dir, prefix, file.getOriginalFilename(), file.getBytes());
+				product.setPr_thumb("/" +dir+ str);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return;
+			}
+			productDao.insertProduct(product);
+			productDao.updateCategory(category);
 		}
 
 		
