@@ -6,6 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.btn-del{
+	padding : 0; border: none; background-color: transparent; color : red;
+}
+form.btn:hover .btn-del{
+	color : #fff;
+}
+form.btn{
+	margin-bottom: 0;
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -45,7 +56,10 @@
 	        </td>
 	        <td>${pro.pr_price}</td>
 	        <td>
-	        	<a class="btn btn-outline-danger" href="<c:url value="/product/delete?pr_code=${pro.pr_code}"></c:url>">삭제</a>
+	        	<form class="btn btn-outline-danger" action="<c:url value="/admin/product/delete"></c:url>"  method="post">
+	        		<button class="btn-del">삭제</button>
+	        		<input type="hidden" name="pr_code" value="${pro.pr_code}">
+	        	</form>
 	        	<a class="btn btn-outline-warning" href="<c:url value="/product/update?pr_code=${pro.pr_code}"></c:url>">수정</a>
 	        </td>
 	      </tr>
