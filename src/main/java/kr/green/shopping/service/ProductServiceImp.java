@@ -83,5 +83,12 @@ import kr.green.shopping.vo.ProductVO;
 			return productDao.selectProductTotalCount(cri);
 		}
 
+		@Override
+		public ProductVO selectProduct(String pr_code) {
+			if(pr_code == null || pr_code.length() != 6)
+				return null;
+			return productDao.selectProduct(pr_code);
+		}
+
 		
 }
