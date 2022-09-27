@@ -67,7 +67,7 @@ public class AdminController {
 	public ModelAndView productInsertPost(ModelAndView mv, ProductVO product, MultipartFile file,
 			HttpServletResponse response) {
 		productService.insertProduct(product, file);
-		messageService.message(response, "제품을 등록했습니다.", "/lg/admin/product/list");
+		messageService.message(response, "제품을 등록했습니다.", "/shopping/admin/product/list");
 		mv.setViewName("redirect:/admin/product/list");
 		return mv;
 	}
