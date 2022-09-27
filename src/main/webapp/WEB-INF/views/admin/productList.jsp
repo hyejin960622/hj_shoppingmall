@@ -53,11 +53,25 @@
     </tbody>
   </table>
   <ul class="pagination justify-content-center">
-  	<li class="page-item"><a class="page-link" href="javascript:void(0);"><<</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">Prev</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">>></a></li>
+  	<li class="page-item <c:if test="${!pm.prev}">disabled</c:if>">
+  		<a class="page-link" href="<c:url value="/admin/product/list?page=1&search=${pm.cri.search}&pr_ca_name=${pm.cri.pr_ca_name}"></c:url>"><<</a>
+  	</li>
+  	<li class="page-item <c:if test="${!pm.prev}">disabled</c:if>">
+  		<a class="page-link" href="<c:url value="/admin/product/list?page=${pm.startPage-1}&search=${pm.cri.search}&pr_ca_name=${pm.cri.pr_ca_name}"></c:url>">Prev</a>
+  	</li>
+
+  	<c:forEach begin="${pm.startPage }" end="${pm.endPage }" var="i">
+    	<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
+    		<a class="page-link" href="<c:url value="/admin/product/list?page=${i}&search=${pm.cri.search}&pr_ca_name=${pm.cri.pr_ca_name}"></c:url>">${i}</a>
+    	</li>
+    </c:forEach>
+
+    <li class="page-item <c:if test="${!pm.next}">disabled</c:if>">
+    	<a class="page-link " href="<c:url value="/admin/product/list?page=${pm.endPage+1}&search=${pm.cri.search}&pr_ca_name=${pm.cri.pr_ca_name}"></c:url>">Next</a>
+    </li>
+    <li class="page-item <c:if test="${!pm.next}">disabled</c:if>">
+    	<a class="page-link" href="<c:url value="/admin/product/list?page=${pm.finalPage}&search=${pm.cri.search}&pr_ca_name=${pm.cri.pr_ca_name}"></c:url>">>></a>
+    </li>
   </ul>
   
   

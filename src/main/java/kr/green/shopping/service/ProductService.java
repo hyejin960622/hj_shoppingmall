@@ -18,5 +18,7 @@ public interface ProductService {
 
 	ArrayList<ProductVO> selectProductList(Criteria cri);
 
+	int getProductTotalCount(Criteria cri);
+
 
 }

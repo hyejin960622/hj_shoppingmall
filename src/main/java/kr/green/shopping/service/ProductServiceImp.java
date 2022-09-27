@@ -76,5 +76,12 @@ import kr.green.shopping.vo.ProductVO;
 			return productDao.selectProductList(cri);
 		}
 
+		@Override
+		public int getProductTotalCount(Criteria cri) {
+			if(cri == null)
+				cri = new Criteria();
+			return productDao.selectProductTotalCount(cri);
+		}
+
 		
 }
