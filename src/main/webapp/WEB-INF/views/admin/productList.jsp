@@ -6,17 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.btn{
-float: right;
-}
-
-</style>
 </head>
 <body>
 <div class="container">
   <h2 class="text-center mt-2">PRODUCT LIST</h2>
-  <a href="<c:url value="/admin/product/insert"></c:url>" class="btn btn-outline-warning mb-3">상품등록</a>
+  <a href="<c:url value="/admin/product/insert"></c:url>" class="btn btn-outline-warning float-right mb-2">상품등록</a>
+  <form>
+  	<div class="input-group mb-3">
+  		<select class="form-control">
+  			<option>카테고리</option>
+  		</select>
+		  <input type="text" class="form-control" placeholder="Search">
+		  <div class="input-group-append">
+		    <button class="btn btn-success" type="submit">Go</button>
+		  </div>
+		</div>
+  </form>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -35,8 +40,14 @@ float: right;
 	        </td>
 	        <td>${pro.pr_ca_name}</td>
 	        <td>${pro.pr_code}</td>
-	        <td>${pro.pr_name}</td>
+	        <td>
+	        	<a href="<c:url value="/product/select?pr_code=${pro.pr_code}"></c:url>">${pro.pr_name}</a>
+	        </td>
 	        <td>${pro.pr_price}</td>
+	        <td>
+	        	<a class="btn btn-outline-danger" href="<c:url value="/product/delete?pr_code=${pro.pr_code}"></c:url>">삭제</a>
+	        	<a class="btn btn-outline-warning" href="<c:url value="/product/update?pr_code=${pro.pr_code}"></c:url>">수정</a>
+	        </td>
 	      </tr>
       </c:forEach>
     </tbody>
@@ -48,17 +59,7 @@ float: right;
     <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
     <li class="page-item"><a class="page-link" href="javascript:void(0);">>></a></li>
   </ul>
-  <form>
-  	<div class="input-group mb-3">
-  		<select class="form-control">
-  			<option>카테고리</option>
-  		</select>
-		  <input type="text" class="form-control" placeholder="Search">
-		  <div class="input-group-append">
-		    <button class="btn btn-success" type="submit">Go</button>
-		  </div>
-		</div>
-  </form>
+  
   
 </div>
 </body>

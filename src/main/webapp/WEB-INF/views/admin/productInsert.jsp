@@ -97,20 +97,20 @@ $(function(){
 		}
 		let pr_ca_name = $('[name=pr_ca_name]').val();
 		if(pr_ca_name == '0'){
-			alert('제품 종류를 선택하세요.');
+			alert('카테고리를 선택하세요.');
 			$('[name=pr_ca_name]').focus();
 			return false;
 		}
 		
 		let pr_name = $('[name=pr_name]').val();
 		if(pr_name == ''){
-			alert('제품 제목을 입력하세요.');
+			alert('상품명을 입력하세요.');
 			$('[name=pr_name]').focus();
 			return false;
 		}
 		let pr_content = $('[name=pr_content]').val();
 		if(pr_content == ''){
-			alert('제품 내용을 입력하세요.');
+			alert('상세설명을 입력하세요.');
 			$('[name=pr_content]').focus();
 			return false;
 		}
