@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.green.shopping.pagination.Criteria;
 import kr.green.shopping.vo.CategoryVO;
 import kr.green.shopping.vo.ProductVO;
 
@@ -14,6 +15,8 @@ public interface ProductService {
 	int insertCategory(CategoryVO category);
 
 	void insertProduct(ProductVO product, MultipartFile file);
+
+	ArrayList<ProductVO> selectProductList(Criteria cri);
 
 
 }

@@ -6,33 +6,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.btn{
+float: right;
+}
+
+</style>
 </head>
 <body>
 <div class="container">
-  <h2>PRODUCT LIST</h2>
-  <a href="<c:url value="/admin/product/insert"></c:url>" class="btn btn-outline-warning mb-3 ">상품등록</a>
+  <h2 class="text-center mt-2">PRODUCT LIST</h2>
+  <a href="<c:url value="/admin/product/insert"></c:url>" class="btn btn-outline-warning mb-3">상품등록</a>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+        <th>이미지</th>
+        <th>카테고리</th>
+        <th>상품코드</th>
+        <th>상품명</th>
+        <th>가격</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
+      <c:forEach items="${list}" var="pro">
+	      <tr>
+	        <td>
+	        	<img alt="제품이미지" src="<c:url value="/product/img${pro.pr_thumb}"></c:url>" width="100" height="100">
+	        </td>
+	        <td>${pro.pr_ca_name}</td>
+	        <td>${pro.pr_code}</td>
+	        <td>${pro.pr_name}</td>
+	        <td>${pro.pr_price}</td>
+	      </tr>
+      </c:forEach>
     </tbody>
   </table>
   <ul class="pagination justify-content-center">
-  	<li class="page-item"><a class="page-link" href="javascript:void(0);">처음</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">이전</a></li>
+  	<li class="page-item"><a class="page-link" href="javascript:void(0);"><<</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">Prev</a></li>
     <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">다음</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">마지막</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">>></a></li>
   </ul>
   <form>
   	<div class="input-group mb-3">

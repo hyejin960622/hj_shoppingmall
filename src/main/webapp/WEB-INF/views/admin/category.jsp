@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-  <h2 class="text-center mt-5">CATEGORY</h2>
+  <h2 class="text-center mb-2 mt-2">CATEGORY</h2>
   <form method="post">
 	  <div class="input-group mb-3">
 	    <input type="text" class="form-control" placeholder="상품카테고리" name="ca_name">

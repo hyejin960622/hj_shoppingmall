@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.shopping.pagination.Criteria;
 import kr.green.shopping.service.MessageService;
 import kr.green.shopping.service.ProductService;
 import kr.green.shopping.vo.CategoryVO;
@@ -49,7 +50,9 @@ public class AdminController {
 		return mv;
 	}
 	@RequestMapping(value = "/admin/product/list", method = RequestMethod.GET)
-	public ModelAndView productListGet(ModelAndView mv) {
+	public ModelAndView productListGet(ModelAndView mv, Criteria cri) {
+		ArrayList<ProductVO> list = productService.selectProductList(cri);
+		mv.addObject("list", list);
 		mv.setViewName("/admin/productList");
 		return mv;
 	}

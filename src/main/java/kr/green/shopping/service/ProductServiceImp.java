@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.shopping.dao.ProductDAO;
+import kr.green.shopping.pagination.Criteria;
 import kr.green.shopping.utils.UploadFileUtils;
 import kr.green.shopping.vo.CategoryVO;
 import kr.green.shopping.vo.ProductVO;
@@ -66,6 +67,13 @@ import kr.green.shopping.vo.ProductVO;
 			}
 			productDao.insertProduct(product);
 			productDao.updateCategory(category);
+		}
+
+		@Override
+		public ArrayList<ProductVO> selectProductList(Criteria cri) {
+			if(cri == null)
+				cri = new Criteria();
+			return productDao.selectProductList(cri);
 		}
 
 		
