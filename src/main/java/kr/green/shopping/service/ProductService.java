@@ -24,5 +24,7 @@ public interface ProductService {
 
 	boolean deleteProduct(String pr_code);
 
+	boolean updateProduct(ProductVO product, MultipartFile file);
+
 
 }

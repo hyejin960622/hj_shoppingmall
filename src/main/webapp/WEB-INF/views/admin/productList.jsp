@@ -60,7 +60,7 @@ form.btn{
 	        		<button class="btn-del">삭제</button>
 	        		<input type="hidden" name="pr_code" value="${pro.pr_code}">
 	        	</form>
-	        	<a class="btn btn-outline-warning" href="<c:url value="/product/update?pr_code=${pro.pr_code}"></c:url>">수정</a>
+	        	<a class="btn btn-outline-warning" href="<c:url value="/admin/product/update?pr_code=${pro.pr_code}"></c:url>">수정</a>
 	        </td>
 	      </tr>
       </c:forEach>

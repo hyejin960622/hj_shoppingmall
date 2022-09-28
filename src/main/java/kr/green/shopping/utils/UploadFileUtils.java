@@ -57,6 +57,7 @@ public class UploadFileUtils {
 		String iconName = uploadPath + path + File.separator + fileName;
 		return iconName.substring(uploadPath.length()).replace(File.separatorChar, '/');
 	}
+	
 	public static boolean deleteFile(String uploadPath, String fileName) {
 		//fileName에 있는 /대신 \로 수정
 		String fileName2 = fileName.replace('/', File.separatorChar);
@@ -67,4 +68,6 @@ public class UploadFileUtils {
 
 		return file.delete();
 	}
+	
+	
 }
