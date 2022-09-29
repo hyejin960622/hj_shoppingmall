@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.green.shopping.dao.BoardDAO">
+	<insert id="insertBoard">
+		insert into board(bd_type, bd_title, bd_content, bd_me_id, bd_ori_num, bd_secret)
+		<if test="bd_ori_num == 0">
+			select #{bd_type}, #{bd_title}, #{bd_content}, #{bd_me_id}, ifnull(max(bd_num),0)+1, 
+			#{bd_secret} from board
+		</if>
+	</insert>
+	<select id="selectBoardList" resultType="kr.green.shopping.vo.BoardVO">
+		select * from board
+			where bd_type = #{bd_type} and bd_title like concat('%',#{cri.search},'%')
+			order by bd_ori_num desc, bd_num asc
+			limit #{cri.pageStart}, #{cri.perPageNum} 
+	</select>
+	<select id="selectBoardTotalCount" resultType="int">
+		select count(*) from board
+			where bd_type = #{bd_type} and bd_title like concat('%',#{cri.search},'%')
+	</select>
+</mapper>

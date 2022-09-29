@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.shopping.pagination.Criteria;
 import kr.green.shopping.pagination.PageMaker;
+import kr.green.shopping.service.BoardService;
 import kr.green.shopping.service.MessageService;
 import kr.green.shopping.service.ProductService;
+import kr.green.shopping.vo.BoardVO;
 import kr.green.shopping.vo.CategoryVO;
+import kr.green.shopping.vo.MemberVO;
 import kr.green.shopping.vo.ProductVO;
 
 @Controller
@@ -27,6 +31,9 @@ public class AdminController {
 	
 	@Autowired
 	MessageService messageService;
+	
+	@Autowired
+	BoardService boardService;
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView home(ModelAndView mv) {
@@ -105,6 +112,36 @@ public class AdminController {
 		else
 			messageService.message(response, "수정실패", "/shopping/admin/product/list");
 		mv.setViewName("/admin/productUpdate");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/admin/notice/list", method = RequestMethod.GET)
+	public ModelAndView noticeList(ModelAndView mv, Criteria cri) {
+		cri.setPerPageNum(2);
+		ArrayList<BoardVO> list = boardService.getBoardList(cri, "NOTICE");
+		int totalCount = boardService.getTotalCount(cri, "NOTICE");
+		PageMaker pm = new PageMaker(totalCount, 2, cri);
+
+		mv.addObject("pm", pm);
+		mv.addObject("list", list);
+		mv.setViewName("/admin/noticeList");
+		return mv;
+	}
+	@RequestMapping(value = "/admin/notice/insert", method = RequestMethod.GET)
+	public ModelAndView noticeInsertGet(ModelAndView mv) {
+
+		mv.setViewName("/admin/noticeInsert");
+		return mv;
+	}
+	@RequestMapping(value = "/admin/notice/insert", method = RequestMethod.POST)
+	public ModelAndView noticeInsertPost(ModelAndView mv, BoardVO board, 
+			HttpServletResponse response, HttpSession session) {
+		MemberVO user= (MemberVO)session.getAttribute("user");
+		boolean res = boardService.insertBoard(board, user, "NOTICE");
+		if(res)
+			messageService.message(response, "공지사항이 등록됐습니다.", "/shopping/admin/notice/list");
+		else
+			messageService.message(response, "공지사항 등록에 실패했습니다.", "/shopping/admin/notice/insert");
 		return mv;
 	}
 	
