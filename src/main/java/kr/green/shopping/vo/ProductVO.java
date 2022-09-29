@@ -1,5 +1,7 @@
 package kr.green.shopping.vo;
 
+import java.text.DecimalFormat;
+
 import lombok.Data;
 
 @Data
@@ -13,6 +15,12 @@ public class ProductVO {
 	
 	public String getPr_thumb_url() {
 		return "/product/img" + pr_thumb;
+	}
+	public String getPr_price_str() {
+		if(pr_price == 0)
+			return "";
+		DecimalFormat format = new DecimalFormat("#,###");
+		return format.format(pr_price) + "원";
 	}
 	
 }
