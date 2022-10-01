@@ -22,12 +22,12 @@
 </head>
 <body>
 <div class="container">
-	<h2>제품 상세</h2>
+	<h2  class="text-center mb-2 mt-2">상세설명</h2>
 	<div class="clearfix">
 		<div class="float-left" style="width:auto; height: auto">
-			<img id="preview" width="150" height="150" src="<c:url value="${p.pr_thumb_url}"></c:url>">
+			<img id="preview" width="300" height="300" src="<c:url value="${p.pr_thumb_url}"></c:url>">
 		</div>
-		<div class="float-right" style="width:calc(100% - 150px - 10px)">
+		<div class="float-right" style="width:calc(100% - 300px - 20px)">
 			<div class="form-group">
 			  <input type="text" class="form-control" value="카테고리 : ${p.pr_ca_name }" readonly>
 			</div>
@@ -37,11 +37,12 @@
 			<div class="form-group">
 			  <input type="text" class="form-control" value="가격 : ${p.pr_price }" readonly>
 			</div>
+			<div class="form-group">
+			  <input type="text" class="form-control" value="${p.pr_name }" readonly>
+			</div>
 		</div>
 	</div>
-	<div class="form-group">
-	  <input type="text" class="form-control" value="${p.pr_name }" readonly>
-	</div>
+	<br>
 	<div class="form-group">
 	  <div class="form-control" style="height:auto">${p.pr_content }</div>
 	</div>

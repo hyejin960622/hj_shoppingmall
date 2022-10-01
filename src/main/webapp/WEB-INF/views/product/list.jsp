@@ -22,7 +22,7 @@
 </head>
 <body>
 <div class="container product-container">
-  <h2>${pr_ca_name}</h2>
+  <h2 class="text-center mb-2 mt-2">${pr_ca_name}</h2>
 </div>
 <script type="text/javascript">
 let pr_ca_name = '${pr_ca_name}';
