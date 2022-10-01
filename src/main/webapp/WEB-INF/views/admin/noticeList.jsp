@@ -32,6 +32,14 @@ form.btn{
       </tr>
     </thead>
     <tbody>
+	    <form>
+		  	<div class="input-group mb-3">
+		  		<input type="text" class="form-control" placeholder="제목으로 검색하세요." name="search" value="${pm.cri.search}">
+				  <div class="input-group-append">
+				    <button class="btn btn-success" type="submit">검색</button>
+				  </div>
+				</div>
+		  </form>
     	<c:forEach items="${list}" var="bo" varStatus="status">
 	      <tr>
 	        <td>${pm.totalCount - (pm.cri.page-1)*pm.cri.perPageNum - status.index}</td>
@@ -44,6 +52,7 @@ form.btn{
 	        	<form class="btn btn-outline-warning" action="<c:url value="/board/delete"></c:url>"  method="post">
 	        		<button class="btn-del">삭제</button>
 	        		<input type="hidden" name="bd_num" value="${bo.bd_num}">
+	        		<input type="hidden" name="bd_type" value="${bo.bd_type}">
 	        	</form>
 	        </td>
 	      </tr>
@@ -52,10 +61,10 @@ form.btn{
   </table>
   <ul class="pagination justify-content-center">
   	<li class="page-item <c:if test="${!pm.prev}">disabled</c:if>">
-  		<a class="page-link" href="<c:url value="/admin/notice/list?page=1&search=${pm.cri.search}"></c:url>">처음</a>
+  		<a class="page-link" href="<c:url value="/admin/notice/list?page=1&search=${pm.cri.search}"></c:url>"><<</a>
   	</li>
   	<li class="page-item <c:if test="${!pm.prev}">disabled</c:if>">
-  		<a class="page-link" href="<c:url value="/admin/notice/list?page=${pm.startPage-1}&search=${pm.cri.search}"></c:url>">이전</a>
+  		<a class="page-link" href="<c:url value="/admin/notice/list?page=${pm.startPage-1}&search=${pm.cri.search}"></c:url>">Prev</a>
   	</li>
   	
   	<c:forEach begin="${pm.startPage }" end="${pm.endPage }" var="i">
@@ -65,20 +74,13 @@ form.btn{
     </c:forEach>
 
     <li class="page-item <c:if test="${!pm.next}">disabled</c:if>">
-    	<a class="page-link " href="<c:url value="/admin/notice/list?page=${pm.endPage+1}&search=${pm.cri.search}"></c:url>">다음</a>
+    	<a class="page-link " href="<c:url value="/admin/notice/list?page=${pm.endPage+1}&search=${pm.cri.search}"></c:url>">Next</a>
     </li>
     <li class="page-item <c:if test="${!pm.next}">disabled</c:if>">
-    	<a class="page-link" href="<c:url value="/admin/notice/list?page=${pm.finalPage}&search=${pm.cri.search}"></c:url>">마지막</a>
+    	<a class="page-link" href="<c:url value="/admin/notice/list?page=${pm.finalPage}&search=${pm.cri.search}"></c:url>">>></a>
     </li>
   </ul>
-  <form>
-  	<div class="input-group mb-3">
-  		<input type="text" class="form-control" placeholder="제목으로 검색하세요." name="search" value="${pm.cri.search}">
-		  <div class="input-group-append">
-		    <button class="btn btn-success" type="submit">검색</button>
-		  </div>
-		</div>
-  </form>
+  
 </div>
 
 </body>
