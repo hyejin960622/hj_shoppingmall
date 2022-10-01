@@ -22,17 +22,6 @@ form.btn{
 <div class="container">
   <h2 class="text-center mt-2">PRODUCT LIST</h2>
   <a href="<c:url value="/admin/product/insert"></c:url>" class="btn btn-outline-warning float-right mb-2">상품등록</a>
-  <form>
-  	<div class="input-group mb-3">
-  		<select class="form-control">
-  			<option>카테고리</option>
-  		</select>
-		  <input type="text" class="form-control" placeholder="Search">
-		  <div class="input-group-append">
-		    <button class="btn btn-success" type="submit">Go</button>
-		  </div>
-		</div>
-  </form>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -44,6 +33,21 @@ form.btn{
       </tr>
     </thead>
     <tbody>
+    <form>
+	  	<div class="input-group mb-3">
+	  		<select class="form-control" name="pr_ca_name">
+	  			<option value="">카테고리</option>
+	  			<c:forEach items="${cl}" var="ca">
+	  				<option <c:if test="${pm.cri.pr_ca_name == ca.ca_name}">selected</c:if> >${ca.ca_name}</option>
+	  			</c:forEach>
+	  		</select>
+			  <input type="text" class="form-control" placeholder="제품 제목 또는 제품 코드로 검색하세요." name="search" value="${pm.cri.search}">
+			  <div class="input-group-append">
+			    <button class="btn btn-success" type="submit">검색</button>
+			  </div>
+			</div>
+  	</form>
+  	
       <c:forEach items="${list}" var="pro">
 	      <tr>
 	        <td>
