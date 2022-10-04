@@ -46,4 +46,14 @@
 				pr_price = #{pr_price}
 			where pr_code= #{pr_code}
 	</update>
+	<select id="selectWish" resultType="kr.green.shopping.vo.WishVO">
+		select * from wishlist 
+			where wi_pr_code = #{pr_code} and wi_me_id = #{me_id}
+	</select>
+	<insert id="insertWish">
+		insert into wishlist(wi_pr_code, wi_me_id) values(#{wi_pr_code},#{wi_me_id})
+	</insert>
+	<delete id="deleteWish">
+		delete from wishlist where wi_pr_code = #{wi_pr_code} and wi_me_id = #{wi_me_id}
+	</delete>
 </mapper>

@@ -2,9 +2,12 @@ package kr.green.shopping.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import kr.green.shopping.pagination.Criteria;
 import kr.green.shopping.vo.CategoryVO;
 import kr.green.shopping.vo.ProductVO;
+import kr.green.shopping.vo.WishVO;
 
 public interface ProductDAO {
 
@@ -27,6 +30,12 @@ public interface ProductDAO {
 	int deleteProduct(String pr_code);
 
 	int updateProduct(ProductVO product);
+
+	WishVO selectWish(@Param("pr_code")String pr_code, @Param("me_id")String me_id);
+
+	void insertWish(WishVO wishlist);
+
+	void deleteWish(WishVO wishlist);
 
 
 

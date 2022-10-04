@@ -6,7 +6,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.shopping.pagination.Criteria;
 import kr.green.shopping.vo.CategoryVO;
+import kr.green.shopping.vo.MemberVO;
 import kr.green.shopping.vo.ProductVO;
+import kr.green.shopping.vo.WishVO;
 
 public interface ProductService {
 
@@ -25,6 +27,10 @@ public interface ProductService {
 	boolean deleteProduct(String pr_code);
 
 	boolean updateProduct(ProductVO product, MultipartFile file);
+
+	WishVO getWishlist(String pr_code, MemberVO user);
+
+	int updateWish(WishVO wishlist);
 
 
 }

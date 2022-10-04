@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +18,9 @@ import kr.green.shopping.pagination.Criteria;
 import kr.green.shopping.pagination.PageMaker;
 import kr.green.shopping.service.ProductService;
 import kr.green.shopping.vo.CategoryVO;
+import kr.green.shopping.vo.MemberVO;
 import kr.green.shopping.vo.ProductVO;
+import kr.green.shopping.vo.WishVO;
 
 @Controller
 public class ProductController {
@@ -25,8 +29,12 @@ public class ProductController {
 	ProductService productService;
 	
 	@RequestMapping(value = "/product/select", method = RequestMethod.GET)
-	public ModelAndView productSelect(ModelAndView mv, String pr_code) {
+	public ModelAndView productSelect(ModelAndView mv, String pr_code,
+			HttpSession session) {
 		ProductVO product = productService.selectProduct(pr_code);
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		WishVO wishlist = productService.getWishlist(pr_code, user);
+		mv.addObject("wi", wishlist);
 		mv.addObject("p", product);
 		mv.setViewName("/product/select");
 		return mv;
@@ -55,6 +63,15 @@ public class ProductController {
 		PageMaker pm = new PageMaker(totalCount, 2, cri);
 		map.put("pm", pm);
 		map.put("list", list);
+		return map;
+	}
+	
+	@RequestMapping(value="/wishlist", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Object,Object> wishlist(@RequestBody WishVO wishlist) {
+		HashMap<Object,Object> map = new HashMap<Object, Object>();
+		int res = productService.updateWish(wishlist);
+		map.put("res", res);
 		return map;
 	}
 

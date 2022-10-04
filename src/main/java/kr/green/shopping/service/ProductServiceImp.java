@@ -11,7 +11,9 @@ import kr.green.shopping.dao.ProductDAO;
 import kr.green.shopping.pagination.Criteria;
 import kr.green.shopping.utils.UploadFileUtils;
 import kr.green.shopping.vo.CategoryVO;
+import kr.green.shopping.vo.MemberVO;
 import kr.green.shopping.vo.ProductVO;
+import kr.green.shopping.vo.WishVO;
 
 	
 	@Service
@@ -126,6 +128,31 @@ import kr.green.shopping.vo.ProductVO;
 				}
 			}
 			return productDao.updateProduct(product) == 1 ? true : false;
+		}
+
+		@Override
+		public WishVO getWishlist(String pr_code, MemberVO user) {
+			if(pr_code == null || pr_code.length() != 6 || user == null)
+				return null;
+
+			return productDao.selectWish(pr_code, user.getMe_id());
+		}
+
+		@Override
+		public int updateWish(WishVO wishlist) {
+			if(wishlist == null || 
+					wishlist.getWi_pr_code() == null ||
+					wishlist.getWi_pr_code().length() != 6 || 
+					wishlist.getWi_me_id() == null)
+				return -1;
+			WishVO dbWishlist = 
+					productDao.selectWish(wishlist.getWi_pr_code(), wishlist.getWi_me_id());
+			if(dbWishlist == null) {
+				productDao.insertWish(wishlist);
+				return 1;
+			}
+			productDao.deleteWish(wishlist);
+			return 0;
 		}
 
 		

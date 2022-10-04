@@ -15,14 +15,29 @@
 	text-align: center; font-size : 50px; line-height: 148px;
 	cursor: pointer; box-sizing: border-box;
 }
+.fa-regular{
+	line-height: 1;
+}
+.display-none{
+	display: none;
+}
+.wishlist{
+	color : red; cursor: pointer;
+}
+
+
 
 </style>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
 <body>
-<div class="container">
-	<h2  class="text-center mb-2 mt-2">상세설명</h2>
+<div class="container text-center mt-3">
+	<h2 class="clearfix">
+		<span class="text-center">DETAIL</span> 
+			<i class="fa-regular fa-heart float-right wishlist <c:if test="${wi != null }">display-none</c:if>"></i>
+			<i class="fa-solid fa-heart float-right wishlist wishlist-ok <c:if test="${wi == null }">display-none</c:if>"></i>
+	</h2>
 	<div class="clearfix">
 		<div class="float-left" style="width:auto; height: auto">
 			<img id="preview" width="300" height="300" src="<c:url value="${p.pr_thumb_url}"></c:url>">
@@ -47,5 +62,34 @@
 	  <div class="form-control" style="height:auto">${p.pr_content }</div>
 	</div>
 </div>
+<script type="text/javascript">
+$(function(){
+	$('.wishlist').click(function(){
+		let wi_me_id = '${user.me_id}';
+		if(wi_me_id == ''){
+			alert('로그인이 필요한 서비스입니다.');
+			return;
+		}
+		let wi_pr_code = '${p.pr_code}';
+		let wishlist = {
+				wi_me_id : wi_me_id,
+				wi_pr_code : wi_pr_code
+		}
+		ajaxPost(false, wishlist, '/wishlist', function(data){
+			if(data.res == 0){
+				$('.wishlist').removeClass('display-none');
+				$('.wishlist-ok').addClass('display-none');
+				alert('위시리스트를 취소했습니다')
+			}else if(data.res == 1){
+				$('.wishlist').addClass('display-none');
+				$('.wishlist-ok').removeClass('display-none');
+				alert('위시리스트에 담았습니다');
+			}else{
+				alert('잘못된 접근입니다.')
+			}
+		})
+	})
+})
+</script>
 </body>
 </html>
