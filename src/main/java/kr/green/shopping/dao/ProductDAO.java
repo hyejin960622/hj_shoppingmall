@@ -37,6 +37,8 @@ public interface ProductDAO {
 
 	void deleteWish(WishVO wishlist);
 
+	ArrayList<ProductVO> selectProductListByWish(String me_id);
+
 
 
 }

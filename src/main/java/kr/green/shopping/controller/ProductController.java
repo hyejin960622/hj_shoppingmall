@@ -46,6 +46,15 @@ public class ProductController {
 		mv.setViewName("/product/list");
 		return mv;
 	}
+	@RequestMapping(value = "/wish/list", method = RequestMethod.GET)
+	public ModelAndView wishList(ModelAndView mv, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		ArrayList<ProductVO> list = productService.selectProductListByWish(user);
+		mv.addObject("list", list);
+		mv.setViewName("/product/wishList");
+		return mv;
+	}
+	
 	@RequestMapping(value="/category/list", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<Object,Object> categoryList() {

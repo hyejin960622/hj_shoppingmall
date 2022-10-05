@@ -32,5 +32,7 @@ public interface ProductService {
 
 	int updateWish(WishVO wishlist);
 
+	ArrayList<ProductVO> selectProductListByWish(MemberVO user);
+
 
 }

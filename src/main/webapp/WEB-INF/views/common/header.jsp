@@ -33,12 +33,13 @@
 			    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa-regular fa-user"></i></a>
 			    <div class="dropdown-menu">
 			      <c:if test="${user == null }">
-				      <a class="dropdown-item" href="<c:url value="/signup"></c:url>">회원가입</a>
-				      <a class="dropdown-item" href="<c:url value="/login"></c:url>">로그인</a>
+				      <a class="dropdown-item" href="<c:url value="/signup"></c:url>">SIGN UP</a>
+				      <a class="dropdown-item" href="<c:url value="/login"></c:url>">LOGIN</a>
 			      </c:if>
 			      <c:if test="${user != null }">
-				      <a class="dropdown-item" href="<c:url value="/mypage"></c:url>">회원정보수정</a>
-				      <a class="dropdown-item" href="<c:url value="/logout"></c:url>">로그아웃</a>
+			      	<a class="dropdown-item" href="<c:url value="/wish/list"></c:url>">WISH LIST</a>
+				      <a class="dropdown-item" href="<c:url value="/mypage"></c:url>">MY PAGE</a>
+				      <a class="dropdown-item" href="<c:url value="/logout"></c:url>">LOGOUT</a>
 			      </c:if>
 			    </div>
 			  </li>

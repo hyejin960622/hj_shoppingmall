@@ -56,4 +56,11 @@
 	<delete id="deleteWish">
 		delete from wishlist where wi_pr_code = #{wi_pr_code} and wi_me_id = #{wi_me_id}
 	</delete>
+	<select id="selectProductListByWish" resultType="kr.green.shopping.vo.ProductVO">
+		select * from product 
+			join wishlist 
+				on pr_code = wi_pr_code 
+			where
+				wi_me_id = #{me_id}
+	</select>
 </mapper>
