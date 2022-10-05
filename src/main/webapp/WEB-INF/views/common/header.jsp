@@ -43,7 +43,7 @@
 			      </c:if>
 			    </div>
 			  </li>
-      	<li class="nav-item">
+      	<li class="nav-item" style="position:absolute; right: 30">
         	<a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
       	</li>
       	<c:if test="${user.me_authority == 10 }">
