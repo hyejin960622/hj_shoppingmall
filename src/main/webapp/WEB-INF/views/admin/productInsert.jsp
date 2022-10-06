@@ -52,6 +52,9 @@
 	  <input type="text" class="form-control" name="pr_name" placeholder="상품명">
 	</div>
 	<div class="form-group">
+	  <input type="text" class="form-control" name="pr_count" placeholder="수량">
+	</div>
+	<div class="form-group">
 	  <textarea class="form-control" name="pr_content" placeholder="상세설명"></textarea>
 	</div>
 	<button class="btn btn-outline-danger col-12">등록</button>

@@ -30,6 +30,7 @@ form.btn{
         <th>상품코드</th>
         <th>상품명</th>
         <th>가격</th>
+        <th>수량</th>
       </tr>
     </thead>
     <tbody>
@@ -59,6 +60,7 @@ form.btn{
 	        	<a href="<c:url value="/product/select?pr_code=${pro.pr_code}"></c:url>">${pro.pr_name}</a>
 	        </td>
 	        <td>${pro.pr_price}</td>
+	        <td>${pro.pr_count}</td>
 	        <td>
 	        	<form class="btn btn-outline-danger" action="<c:url value="/admin/product/delete"></c:url>"  method="post">
 	        		<button class="btn-del">삭제</button>

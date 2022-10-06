@@ -41,6 +41,9 @@
 			<div class="form-group">
 			  <input type="text" class="form-control" name="pr_price" placeholder="가격" value="${pr.pr_price}">
 			</div>
+			<div class="form-group">
+			  <input type="text" class="form-control" name="pr_count" placeholder="수량" value="${pr.pr_count}">
+			</div>
 		</div>
 	</div>
 	<div class="form-group">

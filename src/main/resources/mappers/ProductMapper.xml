@@ -10,8 +10,8 @@
 		select * from category
 	</select>
 	<insert id="insertProduct">
-		insert into product(pr_code, pr_ca_name, pr_name, pr_thumb, pr_content, pr_price)
-		values(#{pr_code}, #{pr_ca_name}, #{pr_name}, #{pr_thumb}, #{pr_content}, #{pr_price})
+		insert into product(pr_code, pr_ca_name, pr_name, pr_thumb, pr_content, pr_price, pr_count)
+		values(#{pr_code}, #{pr_ca_name}, #{pr_name}, #{pr_thumb}, #{pr_content}, #{pr_price}, #{pr_count})
 	</insert>
 	<select id="selectCategoryByCa_code" resultType="kr.green.shopping.vo.CategoryVO">
 		select * from category where ca_code = #{ca_code}
@@ -40,10 +40,12 @@
 	<update id="updateProduct">
 		update product
 			set
+				pr_ca_name = #{pr_ca_name},
 				pr_thumb = #{pr_thumb},
 				pr_name = #{pr_name},
 				pr_content = #{pr_content},
-				pr_price = #{pr_price}
+				pr_price = #{pr_price},
+				pr_count = #{pr_count}
 			where pr_code= #{pr_code}
 	</update>
 	<select id="selectWish" resultType="kr.green.shopping.vo.WishVO">
