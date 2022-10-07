@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.green.shopping.dao.ProductDAO;
 import kr.green.shopping.pagination.Criteria;
 import kr.green.shopping.utils.UploadFileUtils;
+import kr.green.shopping.vo.CartVO;
 import kr.green.shopping.vo.CategoryVO;
 import kr.green.shopping.vo.MemberVO;
 import kr.green.shopping.vo.ProductVO;
@@ -160,6 +161,21 @@ import kr.green.shopping.vo.WishVO;
 			if(user == null || user.getMe_id() == null)
 				return null;
 			return productDao.selectProductListByWish(user.getMe_id());
+		}
+
+		@Override
+		public int putCart(CartVO cart, MemberVO user) {
+			if(cart == null || user == null)
+				return -1;
+			CartVO dbCart = 
+					productDao.selectCart(cart.getCa_pr_code(), cart.getCa_me_id());
+			if(dbCart == null) {
+				productDao.insertCart(cart);
+				return 1;
+			}
+			productDao.deleteCart(cart);
+			return 0;
+			
 		}
 
 		

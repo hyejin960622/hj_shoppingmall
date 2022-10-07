@@ -65,4 +65,15 @@
 			where
 				wi_me_id = #{me_id}
 	</select>
+	<insert id="insertCart">
+	 	insert into cart(ca_num, ca_me_id, ca_pr_code, ca_count)
+	 		values(#{ca_num},#{ca_me_id},#{ca_pr_code},#{ca_count})
+	 </insert>
+	 <select id="selectCart" resultType="kr.green.shopping.vo.CartVO">
+		select * from cart 
+			where ca_pr_code = #{pr_code} and ca_me_id = #{me_id}
+	</select>
+	<delete id="deleteCart">
+		delete from cart where ca_pr_code = #{ca_pr_code} and ca_me_id = #{ca_me_id}
+	</delete>
 </mapper>

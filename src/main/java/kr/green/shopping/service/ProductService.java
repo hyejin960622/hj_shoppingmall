@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.shopping.pagination.Criteria;
+import kr.green.shopping.vo.CartVO;
 import kr.green.shopping.vo.CategoryVO;
 import kr.green.shopping.vo.MemberVO;
 import kr.green.shopping.vo.ProductVO;
@@ -33,6 +34,8 @@ public interface ProductService {
 	int updateWish(WishVO wishlist);
 
 	ArrayList<ProductVO> selectProductListByWish(MemberVO user);
+
+	int putCart(CartVO cart, MemberVO user);
 
 
 }

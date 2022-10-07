@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import kr.green.shopping.pagination.Criteria;
+import kr.green.shopping.vo.CartVO;
 import kr.green.shopping.vo.CategoryVO;
 import kr.green.shopping.vo.ProductVO;
 import kr.green.shopping.vo.WishVO;
@@ -38,6 +39,12 @@ public interface ProductDAO {
 	void deleteWish(WishVO wishlist);
 
 	ArrayList<ProductVO> selectProductListByWish(String me_id);
+
+	CartVO selectCart(@Param("pr_code")String ca_pr_code, @Param("me_id")String ca_me_id);
+
+	void insertCart(CartVO cart);
+
+	void deleteCart(CartVO cart);
 
 
 

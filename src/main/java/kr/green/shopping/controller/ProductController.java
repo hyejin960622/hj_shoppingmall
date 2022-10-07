@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.green.shopping.pagination.Criteria;
 import kr.green.shopping.pagination.PageMaker;
 import kr.green.shopping.service.ProductService;
+import kr.green.shopping.vo.CartVO;
 import kr.green.shopping.vo.CategoryVO;
 import kr.green.shopping.vo.MemberVO;
 import kr.green.shopping.vo.ProductVO;
@@ -80,6 +81,17 @@ public class ProductController {
 	public Map<Object,Object> wishlist(@RequestBody WishVO wishlist) {
 		HashMap<Object,Object> map = new HashMap<Object, Object>();
 		int res = productService.updateWish(wishlist);
+		map.put("res", res);
+		return map;
+	}
+	
+	@RequestMapping(value = "/put/cart", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Object, Object> putCart(@RequestBody CartVO cart, HttpSession session) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		int res = productService.putCart(cart, user);
+		
 		map.put("res", res);
 		return map;
 	}
