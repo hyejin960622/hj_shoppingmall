@@ -27,13 +27,10 @@ li {
 					<div class="xans-element- xans-layout xans-layout-info f-g-0 ">
 						<ul>
 							<li>TITLE. 쇼핑몰만들기</li>
-							<li>TEL. 010-0000-0000
-							</li>
-							<li>OWNER. 진** <span></span> E-MAIL.
-								ooooo@gmail.com
-							</li>
-							<li>ADDRESS. <span></span> 충청북도 청주시 어쩌구 
-							</li>
+							<li>TEL. 010-0000-0000</li>
+							<li>MADE BY. 진** </li>
+							<li>E-MAIL. 0000@gmail.com </li>
+							<li>ADDRESS.  충청북도 청주시 어쩌구 </li>
 							<li>참고사이트 - 분크</li>
 						</ul>
 					</div>
