@@ -37,5 +37,7 @@ public interface ProductService {
 
 	int putCart(CartVO cart, MemberVO user);
 
+	ArrayList<ProductVO> selectProductListByCart(MemberVO user);
+
 
 }

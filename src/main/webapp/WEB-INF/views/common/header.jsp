@@ -38,6 +38,7 @@
 			      </c:if>
 			      <c:if test="${user != null }">
 			      	<a class="dropdown-item" href="<c:url value="/wish/list"></c:url>">WISH LIST</a>
+			      	<a class="dropdown-item" href="<c:url value="/cart/list"></c:url>">CART</a>
 				      <a class="dropdown-item" href="<c:url value="/mypage"></c:url>">MY PAGE</a>
 				      <a class="dropdown-item" href="<c:url value="/logout"></c:url>">LOGOUT</a>
 			      </c:if>

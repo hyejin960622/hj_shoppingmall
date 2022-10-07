@@ -76,4 +76,11 @@
 	<delete id="deleteCart">
 		delete from cart where ca_pr_code = #{ca_pr_code} and ca_me_id = #{ca_me_id}
 	</delete>
+	<select id="selectProductListByCart" resultType="kr.green.shopping.vo.ProductVO">
+		select * from product 
+			join cart 
+				on pr_code = ca_pr_code 
+			where
+				ca_me_id = #{me_id}
+	</select>
 </mapper>

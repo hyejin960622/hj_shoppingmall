@@ -85,6 +85,15 @@ public class ProductController {
 		return map;
 	}
 	
+	@RequestMapping(value = "/cart/list", method = RequestMethod.GET)
+	public ModelAndView cartList(ModelAndView mv, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		ArrayList<ProductVO> list = productService.selectProductListByCart(user);
+		mv.addObject("list", list);
+		mv.setViewName("/product/cart");
+		return mv;
+	}
+	
 	@RequestMapping(value = "/put/cart", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<Object, Object> putCart(@RequestBody CartVO cart, HttpSession session) {

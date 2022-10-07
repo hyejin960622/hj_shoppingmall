@@ -56,7 +56,7 @@ a.btnNormal:hover  {background:#ddd; text-decoration:none;}
 			  <input type="text" class="form-control" value="상품코드 : ${p.pr_code }" readonly>
 			</div>
 			<div class="form-group">
-			  <input type="text" class="form-control" value="가격 : ${p.pr_price }" readonly>
+			  <input type="text" class="form-control" value="가격 : ${p.pr_price_str }" readonly>
 			</div>
 			<div class="form-group">
 			  <input type="text" class="form-control" value="${p.pr_name }" readonly>
