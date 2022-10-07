@@ -88,8 +88,8 @@ public class ProductController {
 	@RequestMapping(value = "/cart/list", method = RequestMethod.GET)
 	public ModelAndView cartList(ModelAndView mv, HttpSession session) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		ArrayList<ProductVO> list = productService.selectProductListByCart(user);
-		mv.addObject("list", list);
+		ArrayList<CartVO> cartList = productService.getCartList(user);
+		mv.addObject("cartList", cartList);
 		mv.setViewName("/product/cart");
 		return mv;
 	}

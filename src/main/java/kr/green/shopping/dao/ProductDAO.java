@@ -48,6 +48,8 @@ public interface ProductDAO {
 
 	ArrayList<ProductVO> selectProductListByCart(String me_id);
 
+	ArrayList<CartVO> selectBasketList(String me_id);
+
 
 
 }

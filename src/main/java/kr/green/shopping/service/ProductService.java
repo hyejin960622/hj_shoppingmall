@@ -39,5 +39,7 @@ public interface ProductService {
 
 	ArrayList<ProductVO> selectProductListByCart(MemberVO user);
 
+	ArrayList<CartVO> getCartList(MemberVO user);
+
 
 }

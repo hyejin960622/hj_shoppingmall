@@ -87,32 +87,40 @@
 					<th>상품정보</th>
 					<th>판매가</th>
 					<th>수량</th>
-					<th>배송비</th>
 					<th>합계</th>
+					<th>삭제</th>
 					<th></th>
 				</tr>
 			</thead>
 			<!-- tbody ---------------------------------------------------------------------------------------------------- -->
 			<tbody>
 				
-				<c:forEach items="${list}" var="cart">
+				<c:forEach items="${cartList}" var="cart">
 	      <tr>
+	      	<td >
+						<input type="checkbox" class="check">
+					</td>
 	        <td>
 	        	<img alt="이미지" src="<c:url value="${cart.pr_thumb_url}"></c:url>" width="100" height="100">
 	        </td>
-	        <td>${cart.pr_name}</td>
-	        <td>
-	        	<a href="<c:url value="/product/select?pr_code=${cart.pr_code}"></c:url>">${cart.pr_name}</a>
+	        <td><a href="<c:url value="/product/select?pr_code=${cart.pr_code}"></c:url>">${cart.pr_name}</a></td>
+	        
+	        <td>${cart.pr_price_str}</td>
+	        <td >
+	        	<div class="table_text_align_center quantity_div">
+							<input type="text" value="${cart.ca_count}" class="quantity_input col-2">	
+							<button class="quantity_btn plus_btn">+</button>
+							<button class="quantity_btn minus_btn">-</button>
+						</div>
+						<button class="quantity_modify_btn">변경</button>
 	        </td>
-	        <td>${cart.pr_price}</td>
-	        <td>${cart.pr_count}</td>
 	        <td>
-	        	<form class="btn btn-outline-danger" action="<c:url value="/admin/product/delete"></c:url>"  method="post">
-	        		<button class="btn-del">삭제</button>
-	        		<input type="hidden" name="pr_code" value="${cart.pr_code}">
-	        	</form>
-	        	<a class="btn btn-outline-warning" href="<c:url value="/admin/product/update?pr_code=${cart.pr_code}"></c:url>">수정</a>
-	        </td>
+						${cart.pr_price * cart.ca_count} 
+					</td>
+	        <td class="td_width_4 table_text_align_center delete_btn"><button>삭제</button></td>
+	        
+	        
+	        
 	      </tr>
       </c:forEach>
 			</tbody>

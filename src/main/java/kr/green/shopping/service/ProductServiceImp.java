@@ -185,5 +185,12 @@ import kr.green.shopping.vo.WishVO;
 			return productDao.selectProductListByCart(user.getMe_id());
 		}
 
+		@Override
+		public ArrayList<CartVO> getCartList(MemberVO user) {
+			if(user == null || user.getMe_id() == null)
+				return null;
+			return productDao.selectBasketList(user.getMe_id());
+		}
+
 		
 }

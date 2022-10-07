@@ -83,4 +83,11 @@
 			where
 				ca_me_id = #{me_id}
 	</select>
+	<select id="selectBasketList" resultType="kr.green.shopping.vo.CartVO">
+		select * from product 
+			join cart 
+				on pr_code = ca_pr_code 
+			where
+				ca_me_id = #{me_id}
+	</select>
 </mapper>
