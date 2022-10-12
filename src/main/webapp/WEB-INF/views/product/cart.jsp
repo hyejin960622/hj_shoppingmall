@@ -6,107 +6,46 @@
 <head>
 <meta charset="UTF-8">
 <title>CART</title>
-<style>
-	.main .box-title{
-		background-color: #ae8a68; border-radius: 5px;
-		padding: 20px; box-shadow: 3px 3px 3px 0 rgba(73, 67, 60, 0.2);
-		margin-bottom: 10px; font-size: 18px; font-weight: bold;
-	}
-	.main .box-title .fa-paw{margin-right: 6px;}
-	.main .box-title .box-message{
-		font-size: 12px; margin: 5px 0; padding-left: 24px;
-	}
-	.main .box-content{margin: 44px;}
-	.main .box-content .box-cart table,
-	.main .box-content .box-summary table{
-		border-top: 2px solid #d7d5d5; border-bottom: 2px solid #d7d5d5;
-		table-layout: fixed; font-size: 14px; text-align: center; 
-	}
-	.main .box-content .box-cart table thead th{padding: 12px 0;}
-	.main .box-content .box-cart table tbody td{
-		padding: 7px 0; vertical-align: middle;
-	}
-	.main .box-content .box-cart table tbody .item-thumb .gs_thumb{
-		max-width: 92px; width: 92px;
-	}
-	.main .box-content .box-cart table tbody .item-name{
-		overflow: hidden; text-overflow: ellipsis; white-space: nowrap; 
-	}
-	.main .box-content .box-cart table tbody .item-name .btn-change-option,
-	.main .box-content .box-cart table tbody .item-count .btn-chage-count{
-		padding: 5px; background-color: #a04c00;
-		border: none; color: #fff7ed; border-radius: 3px;
-		display: inline-block; margin-top: 5px;
-	}
-	.main .box-content .box-cart table tbody .item-count input{
-		border: 1px solid #dfe0df; text-align: center; width: 50px;
-	}
-	.main .box-content .box-cart table tbody .item-btn .btn{
-		padding: 5px; display: inline-block;
-	}
-	.main .box-content .box-cart table tbody .item-btn .btn:hover .icon{color: #FF9E54; cursor: pointer;}
-	.main .box-content .box-cart .box-set .btn{
-		padding: 2px 5px; background-color: white; 
-		font-weight: bold; font-size: 12px; color: #a04c00;
-		border: 1px solid #a04c00;  border-radius: 3px;
-		display: inline-block; margin-bottom: 50px;
-	}
-	.main .box-content .box-cart .box-set .btn:hover{
-		background-color: #a04c00; color: #fff7ed;
-	}
-	.main .box-content .box-summary table{font-size: 18px;}
-	.main .box-content .box-btn button{
-		display: inline-block; border: 1px solid #dfe0df; padding: 10px 20px;
-		font-weight: bold; margin-top: 50px; width: 458px;
-	}
-	.main .box-content .box-btn button:hover{box-shadow: 2px 2px 3px #dfe0df;}
-	.main .box-content .box-btn .btn-order-all{
-		background-color: #fb9600; color: #fff7ed;
-	}
-	.main .box-content .box-btn .btn-order-select{background-color: #fff7ed;}
-</style>
 </head>
-<!-- html ************************************************************************************************************ -->
 <body>
-<!-- 제목 --------------------------------------------------------------------------------------------------------- -->
 <div class="box-title">
 	<h2 class="text-center">CART</h2>
 </div>
-<!-- box-content ------------------------------------------------------------------------------------------------- -->			
 <div class="box-content">
-	<!-- box-cart ------------------------------------------------------------------------------------------------ -->
 	<div class="box-cart">
 		<table class="table list-cart">
-			<!-- thead ----------------------------------------------------------------------------------------------------- -->
 			<thead>
 				<tr>
-					<th width="27px">
-						<input type="checkbox" class="checkAll">
+					<th >
+						<div class="all_check_input_div">
+							<input type="checkbox" class="all_check_input input_size_20" checked="checked"><span class="all_chcek_span"></span>
+						</div>	
 					</th>
 					<th>이미지</th>
 					<th>상품정보</th>
 					<th>판매가</th>
 					<th>수량</th>
-					<th>합계</th>
+					<th class="item-total">합계</th>
 					<th>삭제</th>
 					<th></th>
 				</tr>
 			</thead>
-			<!-- tbody ---------------------------------------------------------------------------------------------------- -->
-			<tbody>
-				
+			
+			<tbody>	
 				<c:forEach items="${cartList}" var="cart">
 	      <tr>
-	      	<td >
-						<input type="checkbox" class="check">
-					</td>
+	     		<td class="cart_info_td">
+	      		<input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked">
+						<input type="hidden" class="individual_bookPrice_input" value="${cart.pr_price_str}">
+						<input type="hidden" class="individual_totalPrice_input" value="${cart.pr_price * cart.ca_count}">
+						</td>
 	        <td>
 	        	<img alt="이미지" src="<c:url value="${cart.pr_thumb_url}"></c:url>" width="100" height="100">
 	        </td>
 	        <td><a href="<c:url value="/product/select?pr_code=${cart.pr_code}"></c:url>">${cart.pr_name}</a></td>
-	        
-	        <td>${cart.pr_price_str}</td>
-	        <td >
+	        <td  class="item-price">${cart.pr_price_str}</td>
+	       						
+	        <td class="item-amount">
 	        	<div class="table_text_align_center quantity_div">
 							<input type="text" value="${cart.ca_count}" class="quantity_input col-2">	
 							<button class="quantity_btn plus_btn">+</button>
@@ -114,27 +53,22 @@
 						</div>
 						<button class="quantity_modify_btn">변경</button>
 	        </td>
-	        <td>
-						${cart.pr_price * cart.ca_count} 
-					</td>
-	        <td class="td_width_4 table_text_align_center delete_btn"><button>삭제</button></td>
 	        
+	        <td class="item-total">
+	        	${cart.pr_price * cart.ca_count}
+	        </td>
 	        
-	        
+
+	        <td class="delete_btn"><button>삭제</button></td> 
 	      </tr>
       </c:forEach>
 			</tbody>
 		</table>
-		<!-- box-set ---------------------------------------------------------------------------------------------------- -->
-		<div class="clearfix">
-			<div class="box-set float-right">
-				<a class="btn btn-select-delete mr-2" href="#">선택상품 삭제</a>
-				<a class="btn btn-clearAll" href="#">장바구니 비우기</a>
-			</div>
-		</div>
 	</div>
-	<!-- box-summary ---------------------------------------------------------------------------------------------------- -->	
-	<div class="box-summary">
+</div>
+		
+	
+	<div class="content_total_section">
 		<table class="table">
 			<!-- thead ----------------------------------------------------------------------------------------------------- -->
 			<thead>
@@ -145,52 +79,97 @@
 				</tr>
 			</thead>
 			<!-- tbody ----------------------------------------------------------------------------------------------------- -->
-		
-		
-		
+			<tbody>
+				<tr>
+					<td><span class="totalPrice_span">70000</span> 원</td>
+					<td><span class="delivery_price">3000</span>원</td>
+					<td><span class="finalTotalPrice_span">70000</span> 원</td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 	<!-- box-btn ------------------------------------------------------------------------------------------------------- -->
-	<div class="box-btn">
-		<button type="button" class="btn-order-all">전체상품주문</button>
-		<button type="button" class="btn-order-select">선택상품주문</button>
+	<div class="content_btn_section">
+		<button type="button" class="btn-order-all">상품주문</button>
 	</div>	
-</div>
+	
+
 </body>
-<!-- script *********************************************************************************************************** -->
+	
+
+
 <script>
-/* 변수 *********************************************************************************************************** */
-/* 이벤트 *********************************************************************************************************** */
-$(function(){
-	$(document).ready(function(){
-		editSummary();
-	})//
+$(document).ready(function(){
 	
-	//체크박스 클릭하면(checkAll) ==================================================================================
-	$('.main .box-content .box-cart table thead .checkAll').click(function () {
-		//클릭된 체크박스의 체크 여부 확인
-		let isChecked = $(this).prop('checked');
-		//모든 체크박스에 적용
-		$('input:checkbox').prop('checked', isChecked);
-	})//
+	/* 종합 정보 섹션 정보 삽입 */
+	setTotalInfo();	
 	
-	//체크박스 클릭하면(check) ==================================================================================
-	$('.main .box-content .box-cart table tbody .check').click(function () {
-		// 클릭된 체크박스가 체크된 상태이면
-		if($(this).is(':checked')){
-			// 전체가 체크된 상태인지 확인
-			let count = $('.main .box-content .box-cart table tbody .check').filter(':checked').length;
-			let totalcount = $('.main .box-content .box-cart table tbody .check').length;
-			// 전체가 체크됬으면 
-			if(totalcount == count)
-				$('.main .box-content .box-cart table thead .checkAll').prop('checked', true);
-		}
-		// 체크가 해제된 상태이면 
-		else
-			$('.main .box-content .box-cart table thead .checkAll').prop('checked', false);				
-	})
 });	
 
+/* 체크여부에따른 종합 정보 변화 */
+$(".individual_cart_checkbox").on("change", function(){
+	/* 총 주문 정보 세팅(배송비, 총 가격, 마일리지, 물품 수, 종류) */
+	setTotalInfo($(".cart_info_td"));
+});
+/* 체크박스 전체 선택 */
+$(".all_check_input").on("click", function(){
+	/* 체크박스 체크/해제 */
+	if($(".all_check_input").prop("checked")){
+		$(".individual_cart_checkbox").attr("checked", true);
+	} else{
+		$(".individual_cart_checkbox").attr("checked", false);
+	}
+	
+	/* 총 주문 정보 세팅(배송비, 총 가격, 마일리지, 물품 수, 종류) */
+	setTotalInfo($(".cart_info_td"));	
+	
+});
+/* 총 주문 정보 세팅(배송비, 총 가격, 마일리지, 물품 수, 종류) */
+function setTotalInfo(){
+	
+	let totalPrice = 0;				// 총 가격
+	let deliveryPrice = 0;			// 배송비
+	let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)
+	
+	$(".cart_info_td").each(function(index, element){
+		
+		if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
+			// 총 가격
+			totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
+				
+		}
+	});
+	
+	
+	/* 배송비 결정 */
+	if(totalPrice >= 100000){
+		deliveryPrice = 0;
+	} else if(totalPrice == 0){
+		deliveryPrice = 0;
+	} else {
+		deliveryPrice = 3000;	
+	}
+	
+		finalTotalPrice = totalPrice + deliveryPrice;
+	
+	/* ※ 세자리 컴마 Javscript Number 객체의 toLocaleString() */
+	
+	// 총 가격
+	$(".totalPrice_span").text(totalPrice.toLocaleString());
+	// 배송비
+	$(".delivery_price").text(deliveryPrice);	
+	// 최종 가격(총 가격 + 배송비)
+	$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());		
+}
 
-</body>
+
+
+</script>
+
+
+
+
+
+
+
 </html>
