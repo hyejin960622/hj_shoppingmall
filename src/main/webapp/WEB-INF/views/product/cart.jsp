@@ -157,11 +157,23 @@ function setTotalInfo(){
 	// 총 가격
 	$(".totalPrice_span").text(totalPrice.toLocaleString());
 	// 배송비
-	$(".delivery_price").text(deliveryPrice);	
+	$(".delivery_price").text(deliveryPrice.toLocaleString());	
 	// 최종 가격(총 가격 + 배송비)
 	$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());		
 }
 
+
+/* 수량버튼 */
+$(".plus_btn").on("click", function(){
+	let quantity = $(this).parent("div").find("input").val();
+	$(this).parent("div").find("input").val(++quantity);
+});
+$(".minus_btn").on("click", function(){
+	let quantity = $(this).parent("div").find("input").val();
+	if(quantity > 1){
+		$(this).parent("div").find("input").val(--quantity);		
+	}
+});
 
 
 </script>
